@@ -126,4 +126,33 @@ public class DatabaseConnector {
 		}
 		transaction.commit();
 	}
+
+	public Iterable<School> getSchool(String schoolId) {
+		String hql = "FROM School S WHERE S.id=" + schoolId;
+		Query query = session.createQuery(hql);
+		List<School> schools = query.list();
+		return schools;
+	}
+
+	public void updateSchool(School school) {
+		String hql ="From School s Where s.id=" +school.getId();
+		Query query = session.createQuery(hql);
+		List<School> results = query.list(); 
+		Transaction transaction = session.beginTransaction();
+		School tmpSchool = results.get(0);
+		tmpSchool.setAddress(school.getAddress());
+		tmpSchool.setName(school.getName());
+		transaction.commit();
+		
+	}
+
+	public School getSchooltoUpdate(String schoolId) {
+			List<School> tmpSchools = (List<School>) getSchool(schoolId);
+			School school = tmpSchools.get(0);
+		return school;
+	}
+	
+	
+	
+	
 }

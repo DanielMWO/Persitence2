@@ -32,6 +32,44 @@ public class SchoolsController {
         return "schoolForm";    
     }
 
+   
+    @RequestMapping(value="/UpdateSchool")
+    public String ShowSchool (@RequestParam(value="schoolId", required=true) String schoolId, Model model, HttpSession session) {    	
+    	if (session.getAttribute("userLogin") == null)
+    		return "redirect:/Login";
+
+    	model.addAttribute("schoolId", DatabaseConnector.getInstance().getSchool(schoolId));
+    	System.out.println("\n----------------\n This is schoolid:" +schoolId);
+    	System.out.println("");
+        return "schoolUpdate";    
+    }
+    
+    
+    @RequestMapping(value="/UpdatedSchool")
+    public String Updayedschool (
+    		@RequestParam(value="schoolId", required=true) String schoolId, 
+    		@RequestParam(value="schoolAddress", required=true) String schoolAddress,
+    		@RequestParam(value="schoolName", required=true) String schoolName,
+    		Model model, HttpSession session) {    	
+    	if (session.getAttribute("userLogin") == null)
+    		return "redirect:/Login";
+
+    	System.out.println("\nschooll id: "+ schoolId );
+    	System.out.println("\nschooll name: "+ schoolName ); 
+    	System.out.println("\nschooll Address: "+ schoolAddress ); 
+    	
+    	School school = DatabaseConnector.getInstance().getSchooltoUpdate(schoolId);
+    	school.setAddress(schoolAddress);
+    	school.setName(schoolName);
+    	DatabaseConnector.getInstance().updateSchool(school);
+    	  	
+    	model.addAttribute("schools", DatabaseConnector.getInstance().getSchools());
+    	
+    	return "schoolsList";    
+    }
+    
+    
+    
     @RequestMapping(value="/CreateSchool", method=RequestMethod.POST)
     public String createSchool(@RequestParam(value="schoolName", required=false) String name,
     		@RequestParam(value="schoolAddress", required=false) String address,
