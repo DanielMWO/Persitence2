@@ -1,3 +1,4 @@
+
 package pl.edu.agh.ki.mwo.web.controllers;
 
 import javax.servlet.http.HttpSession;
@@ -13,11 +14,11 @@ import pl.edu.agh.ki.mwo.model.SchoolClass;
 import pl.edu.agh.ki.mwo.model.Student;
 import pl.edu.agh.ki.mwo.persistence.DatabaseConnector;
 
-//Controller
+@Controller
 public class StudentsController {
 
     @RequestMapping(value="/Students")
-    public String listSchoolClass(Model model, HttpSession session) {    	
+    public String listSudents(Model model, HttpSession session) {    	
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";
 
@@ -27,11 +28,11 @@ public class StudentsController {
     }
     
     @RequestMapping(value="/AddStudent")
-    public String displayAddSchoolClassForm(Model model, HttpSession session) {    	
+    public String displayAddStudentForm(Model model, HttpSession session) {    	
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";
 
-       	model.addAttribute("students", DatabaseConnector.getInstance().getStudents());
+       	model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
        	
         return "studentForm";    
     }

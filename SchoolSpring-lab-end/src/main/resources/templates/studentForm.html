@@ -13,7 +13,7 @@
 						<tr><td>PESEL:</td><td><input type="text" name="studentPesel" /></td></tr>
 						<tr><td>klasa:</td><td><select class="form-control" name="studentSchoolClass" id="studentSchoolClass">
 											    <option value="-1">---</option>
-											    <option th:each="schoolClass: ${schoolsClasses}" th:value="${schoolClass.id}" th:text="${schoolClass.profile} + ', ' + ${schoolClass.startYear} + ', ' + ${schoolClass.currentYear}""></option>
+											    <option th:each="schoolClass: ${schoolClasses}" th:value="${schoolClass.id}" th:text="${schoolClass.profile} + ', ' + ${schoolClass.startYear} + ', ' + ${schoolClass.currentYear}"></option> 
 											    </select></td></tr>
 					</table><br/><BR/>
 					<input type="submit" value="Utwórz"/>

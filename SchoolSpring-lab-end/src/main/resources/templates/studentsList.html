@@ -11,7 +11,7 @@
     	<div th:include="menuFragment" ></div>
 		<br/><Br/>
 		<table border="1" cellpadding="5">
-			<tr><th>Id</th><th>Rok rozpoczęcia</th><th>Obecny rok</th><th>Profil</th><th>Akcje</th></tr>
+			<tr><th>Id</th><th>Imię</th><th>Nazwisko</th><th>PESEL</th><th>Akcje</th></tr>
 			<tr th:each="student: ${students}">
 				<td><span th:text="${student.id}" /></td>
 				<td><span th:text="${student.name}" /></td>
