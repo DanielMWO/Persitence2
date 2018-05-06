@@ -2,6 +2,7 @@ package pl.edu.agh.ki.mwo.web.controllers;
 
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.groovy.runtime.dgmimpl.arrays.IntegerArrayGetAtMetaMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,6 +69,34 @@ public class SchoolClassesController {
     	System.out.println(tmpSC);
     	return "schoolClassUpdate";
     }
+    
+    
+    @RequestMapping(value="/SchoolClassUpdated", method=RequestMethod.POST)
+    public String updateSchollClass(
+    		@RequestParam(value="schoolClassId", required=true) String schoolClassId,
+    		@RequestParam(value="schoolClassCurrentYear", required=true) String schoolClassCurentYear,
+    		@RequestParam(value="schoolClassStartYear", required=true) String schoolClassStartYear,
+    		@RequestParam(value="schoolClassProfile", required=true) String schoolClassProfile,
+    		Model model, HttpSession session) {
+    		
+    		if (session.getAttribute("userLogin") == null)
+    			return "redirect:/Login";
+    	
+    		SchoolClass schoolClass =  DatabaseConnector.getInstance().getSchoolClassToUpdate(schoolClassId);
+    		schoolClass.setCurrentYear(Integer.valueOf(schoolClassCurentYear));
+    		schoolClass.setStartYear(Integer.valueOf(schoolClassStartYear));
+    		schoolClass.setProfile(schoolClassProfile);
+    		
+    		DatabaseConnector.getInstance().updateSchoolClass(schoolClass);
+    		
+    		
+    		model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
+        	model.addAttribute("message", "Klasa Została zmieniona");
+    		
+    		
+    		return "schoolClassesList";
+    }
+    
     
     
     @RequestMapping(value="/DeleteSchoolClass", method=RequestMethod.POST)

@@ -158,6 +158,19 @@ public class DatabaseConnector {
 		SchoolClass schollClass = (SchoolClass) query.list().get(0);
 		return schollClass;
 	}
+
+	public void updateSchoolClass(SchoolClass schoolClass) {
+		String hql ="From SchoolClass s Where s.id=" +schoolClass.getId();
+		Query query = session.createQuery(hql);
+		List<SchoolClass> results = query.list(); 
+		Transaction transaction = session.beginTransaction();
+		SchoolClass tmpSchoolClass = results.get(0);
+		tmpSchoolClass.setCurrentYear(schoolClass.getCurrentYear());
+		tmpSchoolClass.setStartYear(schoolClass.getStartYear());
+		tmpSchoolClass.setProfile(schoolClass.getProfile());
+		transaction.commit();
+		
+	}
 	
 	
 	
