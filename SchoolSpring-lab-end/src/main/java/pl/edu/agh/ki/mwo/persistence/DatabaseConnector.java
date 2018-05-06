@@ -66,6 +66,9 @@ public class DatabaseConnector {
 		return schoolClasses;
 	}
 	
+	
+	
+	
 	public void addSchoolClass(SchoolClass schoolClass, String schoolId) {
 		String hql = "FROM School S WHERE S.id=" + schoolId;
 		Query query = session.createQuery(hql);

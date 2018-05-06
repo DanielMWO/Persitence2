@@ -11,8 +11,8 @@
     	<div th:include="menuFragment" ></div>
 		<br/><Br/>
 		<table border="1" cellpadding="5">
-			<tr><th>Id</th><th>Rok rozpoczęcia</th><th>Obecny rok</th><th>Profil</th><th>Akcje</th><th>Modyfikuj</th></tr>
-			<tr th:each="schoolClass: ${schoolClasses}">
+			<tr><th>Id</th><th>Rok rozpoczęcia</th><th>Obecny rok</th><th>Profil</th><th>Akcje</th><th>Modyfikuj</th><th>NazwaSzkoły</th></tr>
+			<tr th:each="schoolClass: ${classesAndSchools}" >
 				<td><span th:text="${schoolClass.id}" /></td>
 				<td><span th:text="${schoolClass.startYear}" /></td>
 				<td><span th:text="${schoolClass.currentYear}" /></td>
@@ -29,6 +29,7 @@
 		                <button type="submit">Modyfikuj</button>
 		            </form>
 		        </td>
+		        <td><span th:text="${schoolName}" /></td>
 			</tr>
 		
 		

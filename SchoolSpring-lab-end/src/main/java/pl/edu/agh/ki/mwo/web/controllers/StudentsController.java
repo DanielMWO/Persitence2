@@ -23,8 +23,7 @@ public class StudentsController {
     		return "redirect:/Login";
 
     	model.addAttribute("students", DatabaseConnector.getInstance().getStudents());
-    	
-        return "studentsList";    
+    	return "studentsList";    
     }
     
     @RequestMapping(value="/AddStudent")

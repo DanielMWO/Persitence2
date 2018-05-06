@@ -1,5 +1,10 @@
 package pl.edu.agh.ki.mwo.web.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.codehaus.groovy.runtime.dgmimpl.arrays.IntegerArrayGetAtMetaMethod;
@@ -22,6 +27,22 @@ public class SchoolClassesController {
     		return "redirect:/Login";
 
     	model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
+
+    	Iterable<School> schoolList = DatabaseConnector.getInstance().getSchools();
+    	Iterable<SchoolClass> classList = DatabaseConnector.getInstance().getSchoolClasses();
+    	List<String> schoolNames =  new ArrayList<>();
+    	HashMap<SchoolClass, School> classesAndSchools = new HashMap<>();
+    	
+    	for (SchoolClass schollClass : classList) {
+    		for (School school : schoolList ) {
+    			if (school.getClasses().contains(schollClass)) {
+    				classesAndSchools.put(schollClass, school);
+    				System.out.println("Klasa: " +  schollClass + " Szkoła: " + school.getName());
+    			}
+    		}
+    	}
+    	
+    	model.addAttribute("classesAndSchools", classesAndSchools);
     	
         return "schoolClassesList";    
     }
