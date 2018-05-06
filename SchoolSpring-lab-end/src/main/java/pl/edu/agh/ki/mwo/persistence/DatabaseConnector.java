@@ -181,7 +181,15 @@ public class DatabaseConnector {
 	}
 
 	public void updateStudent(Student student) {
-		Stri
+		String hql = "FROM Student s WHERE s.id=" +student.getId();
+		Query query =session.createQuery(hql);
+		List<Student> results =query.list();
+		Transaction transaction = session.beginTransaction();
+		Student tmpStudent = results.get(0);
+		tmpStudent.setName(student.getName());
+		tmpStudent.setSurname(student.getSurname());
+		tmpStudent.setPesel(student.getPesel());
+		transaction.commit();
 	}
 	
 	
