@@ -171,6 +171,18 @@ public class DatabaseConnector {
 		transaction.commit();
 		
 	}
+
+	public Student getStudnetToUpdate(String studentId) {
+		String hql = "FROM Student s WHERE s.id=" +studentId;
+		Query query =session.createQuery(hql);
+		Student student = (Student) query.list().get(0);
+		// TODO Auto-generated method stub
+		return student;
+	}
+
+	public void updateStudent(Student student) {
+		Stri
+	}
 	
 	
 	

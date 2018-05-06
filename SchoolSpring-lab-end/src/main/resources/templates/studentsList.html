@@ -11,7 +11,7 @@
     	<div th:include="menuFragment" ></div>
 		<br/><Br/>
 		<table border="1" cellpadding="5">
-			<tr><th>Id</th><th>Imię</th><th>Nazwisko</th><th>PESEL</th><th>Akcje</th></tr>
+			<tr><th>Id</th><th>Imię</th><th>Nazwisko</th><th>PESEL</th><th>Akcje</th><th>Modyfukuj</th></tr>
 			<tr th:each="student: ${students}">
 				<td><span th:text="${student.id}" /></td>
 				<td><span th:text="${student.name}" /></td>
@@ -21,8 +21,15 @@
 		            <form action="DeleteStudent" method="POST">
 		            	<input type="hidden" name="studentId" th:value="${student.id}" />
 		                <button type="submit">X</button>
+		            </form></td>
+		            <td>
+		            <form action="StudentUpdate" method="POST">
+		            	<input type="hidden" name="studentId" th:value="${student.id}" />
+		                <button type="submit">Modyfikuj</button>
 		            </form>
 		        </td>
+		           
+		       
 			</tr>
 		
 		
