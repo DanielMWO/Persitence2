@@ -1,13 +1,8 @@
 package pl.edu.agh.ki.mwo.web.controllers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.LinkedHashMap;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.groovy.runtime.dgmimpl.arrays.IntegerArrayGetAtMetaMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +21,11 @@ public class SchoolClassesController {
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";
 
-    	model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
+    	//model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
 
     	Iterable<School> schoolList = DatabaseConnector.getInstance().getSchools();
     	Iterable<SchoolClass> classList = DatabaseConnector.getInstance().getSchoolClasses();
-    	List<String> schoolNames =  new ArrayList<>();
-    	HashMap<SchoolClass, School> classesAndSchools = new HashMap<>();
+    	LinkedHashMap<SchoolClass, School> classesAndSchools = new LinkedHashMap<>();
     	
     	for (SchoolClass schollClass : classList) {
     		for (School school : schoolList ) {
@@ -72,10 +66,11 @@ public class SchoolClassesController {
     	schoolClass.setProfile(profile);
     	
     	DatabaseConnector.getInstance().addSchoolClass(schoolClass, schoolId);    	
-       	model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
+       	
+    	/*model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
     	model.addAttribute("message", "Nowa klasa została dodana");
-         	
-    	return "schoolClassesList";
+        */ 	
+    	return "redirect:/SchoolClasses";
     }
     
     @RequestMapping(value="/SchoolClassUpdate", method=RequestMethod.POST)
@@ -111,11 +106,11 @@ public class SchoolClassesController {
     		DatabaseConnector.getInstance().updateSchoolClass(schoolClass);
     		
     		
-    		model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
+    		/*model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
         	model.addAttribute("message", "Klasa Została zmieniona");
+    		*/
     		
-    		
-    		return "schoolClassesList";
+    		return "redirect:/SchoolClasses";
     }
     
     

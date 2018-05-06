@@ -12,24 +12,24 @@
 		<br/><Br/>
 		<table border="1" cellpadding="5">
 			<tr><th>Id</th><th>Rok rozpoczęcia</th><th>Obecny rok</th><th>Profil</th><th>Akcje</th><th>Modyfikuj</th><th>NazwaSzkoły</th></tr>
-			<tr th:each="schoolClass: ${classesAndSchools}" >
-				<td><span th:text="${schoolClass.id}" /></td>
-				<td><span th:text="${schoolClass.startYear}" /></td>
-				<td><span th:text="${schoolClass.currentYear}" /></td>
-				<td><span th:text="${schoolClass.profile}" /></td>
+			<tr th:each="instance: ${classesAndSchools}" >
+				<td><span th:text="${instance.key.id}" /></td>
+				<td><span th:text="${instance.key.startYear}" /></td>
+				<td><span th:text="${instance.key.currentYear}" /></td>
+				<td><span th:text="${instance.key.profile}" /></td>
 		        <td>
 		            <form action="DeleteSchoolClass" method="POST">
-		            	<input type="hidden" name="schoolClassId" th:value="${schoolClass.id}" />
+		            	<input type="hidden" name="schoolClassId" th:value="${instance.key.id}" />
 		                <button type="submit">X</button>
 		            </form>
 		        </td>
 		         <td>
 		            <form action="SchoolClassUpdate" method="POST">
-		            	<input type="hidden" name="schoolClassId" th:value="${schoolClass.id}" />
+		            	<input type="hidden" name="schoolClassId" th:value="${instance.key.id}" />
 		                <button type="submit">Modyfikuj</button>
 		            </form>
 		        </td>
-		        <td><span th:text="${schoolName}" /></td>
+		        <td><span th:text="${instance.value.name}" /></td>
 			</tr>
 		
 		
