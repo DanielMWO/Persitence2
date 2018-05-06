@@ -7,28 +7,21 @@
     <div th:include="menuFragment" ></div>
     	<br/><br/>
 	   			<form action="UpdatedSchool" method="POST">
-	   			<table>
+	   			<table border="1" cellpading="5">
 	   			
-					<tr><th>Nazwa Szkoły</th><th>Adres</th><th>Akcja</th></tr>
+					<tr><th>ID</th><th>Nazwa Szkoły</th><th>Adres</th><th>Akcja</th></tr>
 					
 					<tr th:each="school: ${schoolId}">
 					
+					<td><span th:text="${school.id}" /></td>
 					<td><input type="text" name="schoolName" th:value="${school.name}" /> </td>
 					<td><input type="text" name="schoolAddress" th:value="${school.address}" /> </td>
 					<td><input type="submit" value="Update"/></td>
-					<td><input type="hidden" name="schoolId" th:value="${school.id}" /> </td>					
+					<input type="hidden" name="schoolId" th:value="${school.id}" /> 					
 					</tr>
 				</table>
 				</form>
-				<table border="1" cellpadding="5">
-			<tr><th>Id</th><th>Nazwa</th><th>Adres</th><th>Akcje</th><th>Modyfikuj</th></tr>
-			<tr th:each="school: ${schoolId}">
-				<td><span th:text="${school.id}" /></td>
-				<td><span th:text="${school.name}" /></td>
-				<td><span th:text="${school.address}" /></td>
-		        </tr>
-		        </table>
-				
+					
     </div>
 
 </body>

@@ -151,6 +151,13 @@ public class DatabaseConnector {
 			School school = tmpSchools.get(0);
 		return school;
 	}
+
+	public SchoolClass getSchoolClassToUpdate(String schoolClassId) {
+		String hql = "FROM SchoolClass s WHERE s.id=" +schoolClassId;
+		Query query =session.createQuery(hql);
+		SchoolClass schollClass = (SchoolClass) query.list().get(0);
+		return schollClass;
+	}
 	
 	
 	

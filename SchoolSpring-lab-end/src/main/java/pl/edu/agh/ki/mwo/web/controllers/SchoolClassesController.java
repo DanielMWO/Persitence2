@@ -56,6 +56,20 @@ public class SchoolClassesController {
     	return "schoolClassesList";
     }
     
+    @RequestMapping(value="/SchoolClassUpdate", method=RequestMethod.POST)
+    public String showSchollClasstoUpdate(
+    		@RequestParam(value="schoolClassId", required=true) String schoolClassId, Model model, HttpSession session
+    		) {	
+    	if (session.getAttribute("userLogin") == null)
+    		return "redirect:/Login";
+    	
+    	model.addAttribute("schoolClassToUpdate", DatabaseConnector.getInstance().getSchoolClassToUpdate(schoolClassId));
+    	SchoolClass tmpSC = DatabaseConnector.getInstance().getSchoolClassToUpdate(schoolClassId);
+    	System.out.println(tmpSC);
+    	return "schoolClassUpdate";
+    }
+    
+    
     @RequestMapping(value="/DeleteSchoolClass", method=RequestMethod.POST)
     public String deleteSchoolClass(@RequestParam(value="schoolClassId", required=false) String schoolClassId,
     		Model model, HttpSession session) {    	
